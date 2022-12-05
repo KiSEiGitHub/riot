@@ -3,6 +3,12 @@
   src: url("../assets/fonts/Friz Quadrata Bold.otf");
 }
 
+@font-face {
+  font-family: Quadra-Regular;
+  src: url("../assets/fonts/Friz\ Quadrata\ Regular.ttf");
+}
+
+
 *,
 ::after,
 ::before {
@@ -22,7 +28,6 @@ body {
 .main-container {
   max-width: 1600px;
   height: auto;
-  /* background-color: antiquewhite; */
   margin: 0 auto;
   padding: 20px;
 }
@@ -30,7 +35,6 @@ body {
 .container-champion {
     width: 100%;
     height: auto;
-    /* background-color: #fff; */
     margin-top: 20px;
     display: flex;
     justify-content: center;
@@ -40,12 +44,36 @@ body {
 .champions-cards {
     width: 300px;
     height: 460px;
-    background-color: #000;
-    margin: 25px 10px
+    margin: 25px 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.champion-description {
+  padding: 5px 20px;
 }
 
 .title {
     font-family: Quadra-Bold;
     font-size: 2.5em;
     text-align: center;
+}
+
+.champion-name {
+  font-family: Quadra-Regular;
+  font-size: 1.8em;
+}
+
+.champion-title {
+  font-family: Quadra-Regular;
+  font-size: 1.2em;
+  margin-top: 10px;
+  color: rgb(223, 223, 223);
+  margin-bottom: 10px;
+}
+
+.chamption-tags {
+  margin-right: 20px;
+  font-family: Quadra-Regular;
+  font-size: 0.85em;
 }
