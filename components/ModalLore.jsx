@@ -73,9 +73,9 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                                 <Heading size='md' mb={5}>Abilities</Heading>
                                 <Tabs variant='unstyled'>
                                     <TabList>
-                                        {spells.map(({ spell }, key) => (
+                                        {spells.map(({ image }, key) => (
                                             <Tab key={key} _selected={{ transform: 'scale(1.3)' }}>
-                                                <Image src={spell} alt='ok' borderRadius={10} />
+                                                <Image src={image} alt='ok' borderRadius={10} />
                                             </Tab>
                                         ))}
                                     </TabList>

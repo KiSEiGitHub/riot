@@ -12,7 +12,6 @@ export default function Home() {
     );
 
     const { data } = await res.json();
-    console.log(data);
     const champ = Object.values(data); // tableau
 
     champ.forEach(async (champion) => {
@@ -28,14 +27,27 @@ export default function Home() {
       );
       const dataSums = await resSumms.json();
       const summoners = Object.values(dataSums.data);
-        let tabSums = [];
-        
+      let tabSums = [];
+
       for (let i = 0; i < summoners.length; i++) {
         tabSums.push({
           id: i,
           name: summoners[i].name,
           description: summoners[i].description,
           img: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/${summoners[i].id}.png`,
+        });
+      }
+
+      // fetch spells
+      const spellsTab = [];
+      const spells = Object.values(data)[0].spells;
+      for (let i = 0; i < spells.length; i++) {
+        spellsTab.push({
+          id: spells[i].id,
+          imageName: spells[i].image.full,
+          description: spells[i].description,
+          name: spells[i].name,
+          image: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/${spells[i].image.full}`,
         });
       }
 
@@ -48,36 +60,7 @@ export default function Home() {
           splash: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`,
           loading: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.name}_0.jpg`,
           lore: data[champion.name]["lore"],
-          spells: [
-            {
-              id: 1,
-              spell: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/${champion.name}Q.png`,
-              description: data[champion.name]["spells"][0]["description"],
-              name: data[champion.name]["spells"][0]["name"],
-              keyboard: "Q",
-            },
-            {
-              id: 2,
-              spell: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/${champion.name}W.png`,
-              description: data[champion.name]["spells"][1]["description"],
-              name: data[champion.name]["spells"][1]["name"],
-              keyboard: "W",
-            },
-            {
-              id: 3,
-              spell: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/${champion.name}E.png`,
-              description: data[champion.name]["spells"][2]["description"],
-              name: data[champion.name]["spells"][2]["name"],
-              keyboard: "E",
-            },
-            {
-              id: 4,
-              spell: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/${champion.name}R.png`,
-              description: data[champion.name]["spells"][3]["description"],
-              name: data[champion.name]["spells"][3]["name"],
-              keyboard: "R",
-            },
-          ],
+          spells: spellsTab,
           sums: tabSums,
         },
       ]);
@@ -90,7 +73,7 @@ export default function Home() {
     getchampion();
   }, []);
 
-    // console.log(champion);
+  console.log(champion);
 
   return (
     <div className="main-container">
