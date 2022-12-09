@@ -3,13 +3,33 @@ import {
     Button, Heading, HStack, Image, Modal, ModalBody,
     ModalCloseButton, ModalContent,
     ModalHeader, ModalOverlay, Text, useDisclosure,
-    Tabs, TabList, TabPanels, Tab, TabPanel, Tag
+    Tabs, TabList, TabPanels, Tab, TabPanel, Tag, Flex, Tooltip
 } from '@chakra-ui/react'
 import React from 'react'
 
 export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, title }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const TagScheme = (tag) => {
+        switch (tag) {
+            case 'Assassin': return 'red';
+            case 'Fighter': return 'orange';
+            case 'Mage': return 'teal';
+            case 'Tank': return 'green';
+            case 'Marksman': return 'blue';
+        }
+    }
+
+    const ranSums = (tag) => {
+        switch (tag) {
+            case 'Assassin': return 2;
+            case 'Fighter': return 13;
+            case 'Mage': return 0;
+            case 'Tank': return 3;
+            case 'Marksman': return 6;
+        }
+    }
 
     return (
         <>
@@ -23,7 +43,7 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
             >
                 Lore
             </Button>
-            <Modal size='lg' isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} size='xl' onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent bg='#171717'>
                     <ModalHeader>{name} ~ {title}</ModalHeader>
@@ -45,7 +65,7 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                             <Box my={4}>
                                 <Heading size='md' my={5}>Roles</Heading>
                                 {tags.map((item, key) => (
-                                    <Tag key={key} mr={2}>{item}</Tag>
+                                    <Tag key={key} mr={2} colorScheme={TagScheme(item)}>{item}</Tag>
                                 ))}
                             </Box>
 
@@ -71,9 +91,21 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                             </Box>
 
                             <Box my={4}>
-                                <Heading size='md'>Recommanded summoners spells</Heading>
-                                <Text>{sums[1].name}</Text>
-                                <Text>{sums[5].name}</Text>
+                                <Heading size='md' mb={2}>Recommanded summoners spells</Heading>
+                                <Flex gap={2}>
+                                    <Tooltip label={sums[4]['description']} borderRadius={5} bg='#171717' color='#fff' p={2}>
+                                        <Image src={sums[4]['img']} alt='ok' w='50px' borderRadius={10} />
+                                    </Tooltip>
+                                    <Tooltip label={sums[2]['description']} borderRadius={5} bg='#171717' color='#fff' p={2}>
+                                        <Image src={sums[2]['img']} alt='ok' w='50px' borderRadius={10} />
+                                    </Tooltip>
+                                    <Tooltip label={sums[6]['description']} borderRadius={5} bg='#171717' color='#fff' p={2}>
+                                        <Image src={sums[6]['img']} alt='ok' w='50px' borderRadius={10} />
+                                    </Tooltip>
+                                    <Tooltip label={sums[13]['description']} borderRadius={5} bg='#171717' color='#fff' p={2}>
+                                        <Image src={sums[13]['img']} alt='ok' w='50px' borderRadius={10} />
+                                    </Tooltip>
+                                </Flex>
                             </Box>
 
                             <Box my={4}>
@@ -86,3 +118,4 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
         </>
     )
 }
+

@@ -12,7 +12,7 @@ export default function Home() {
     );
 
     const { data } = await res.json();
-    // console.log(data);
+    console.log(data);
     const champ = Object.values(data); // tableau
 
     champ.forEach(async (champion) => {
@@ -28,8 +28,17 @@ export default function Home() {
       );
       const dataSums = await resSumms.json();
       const summoners = Object.values(dataSums.data);
-
+        let tabSums = [];
         
+      for (let i = 0; i < summoners.length; i++) {
+        tabSums.push({
+          id: i,
+          name: summoners[i].name,
+          description: summoners[i].description,
+          img: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/${summoners[i].id}.png`,
+        });
+      }
+
       setChampion((curr) => [
         ...curr,
         {
@@ -69,7 +78,7 @@ export default function Home() {
               keyboard: "R",
             },
           ],
-          sums: summoners,
+          sums: tabSums,
         },
       ]);
 
@@ -81,7 +90,7 @@ export default function Home() {
     getchampion();
   }, []);
 
-  //   console.log(champion);
+    // console.log(champion);
 
   return (
     <div className="main-container">
