@@ -82,7 +82,10 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                                     <TabPanels>
                                         {spells.map(({ description, name, keyboard }, key) => (
                                             <TabPanel key={key}>
-                                                <Heading size='sm' my={2}>{name} ({keyboard})</Heading>
+                                                <HStack spacing={2}>
+                                                    <Heading size='sm' my={2}>{name}</Heading>
+                                                    <Text fontStyle='italic' color='red'>{keyboard}</Text>
+                                                </HStack>
                                                 <Text textAlign='justify'>{description}</Text>
                                             </TabPanel>
                                         ))}

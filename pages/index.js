@@ -38,8 +38,18 @@ export default function Home() {
         });
       }
 
-      // fetch spells
       const spellsTab = [];
+
+      // add passive
+      const champPassive = Object.values(data)[0].passive;
+      spellsTab.push({
+        name: champPassive.name,
+        description: champPassive.description,
+        image: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/passive/${champPassive.image.full}`,
+        keyboard: "passive",
+      });
+
+      // fetch spells
       const spells = Object.values(data)[0].spells;
       for (let i = 0; i < spells.length; i++) {
         spellsTab.push({
