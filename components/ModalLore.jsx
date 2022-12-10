@@ -1,13 +1,12 @@
 import {
     Box,
-    Button, Heading, HStack, Image, Modal, ModalBody,
+    Button, Divider, Flex, Heading, HStack, Image, Modal, ModalBody,
     ModalCloseButton, ModalContent,
-    ModalHeader, ModalOverlay, Text, useDisclosure,
-    Tabs, TabList, TabPanels, Tab, TabPanel, Tag, Flex, Tooltip
-} from '@chakra-ui/react'
-import React from 'react'
+    ModalHeader, ModalOverlay, Tab, TabList, TabPanel, TabPanels, Tabs, Tag, Text, Tooltip, useDisclosure
+} from '@chakra-ui/react';
+import React from 'react';
 
-export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, title }) {
+export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, title, ally, enemy }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -34,16 +33,16 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
     return (
         <>
             <Button
-                variant='outline'
-                colorScheme='yellow'
+                colorScheme='blue.'
                 onClick={onOpen}
                 display='block' mt={4}
                 pos='absolute'
+                w='100%'
+                h='100%'
                 zIndex={999}
-            >
-                Lore
-            </Button>
-            <Modal isOpen={isOpen} size='xl' onClose={onClose}>
+            />
+
+            <Modal isOpen={isOpen} w='900px' onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent bg='#171717'>
                     <ModalHeader>{name} ~ {title}</ModalHeader>
@@ -69,6 +68,8 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                                 ))}
                             </Box>
 
+                            <Divider borderColor='#292929' />
+
                             <Box my={4}>
                                 <Heading size='md' mb={5}>Abilities</Heading>
                                 <Tabs variant='unstyled'>
@@ -93,6 +94,8 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                                 </Tabs>
                             </Box>
 
+                            <Divider borderColor='#292929' />
+
                             <Box my={4}>
                                 <Heading size='md' mb={2}>Recommanded summoners spells</Heading>
                                 <Flex gap={2}>
@@ -102,17 +105,29 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                                     <Tooltip label={sums[2]['description']} borderRadius={5} bg='#171717' color='#fff' p={2}>
                                         <Image src={sums[2]['img']} alt='ok' w='50px' borderRadius={10} />
                                     </Tooltip>
-                                    <Tooltip label={sums[6]['description']} borderRadius={5} bg='#171717' color='#fff' p={2}>
-                                        <Image src={sums[6]['img']} alt='ok' w='50px' borderRadius={10} />
-                                    </Tooltip>
-                                    <Tooltip label={sums[13]['description']} borderRadius={5} bg='#171717' color='#fff' p={2}>
-                                        <Image src={sums[13]['img']} alt='ok' w='50px' borderRadius={10} />
-                                    </Tooltip>
                                 </Flex>
                             </Box>
 
+                            <Divider borderColor='#292929' />
+
                             <Box my={4}>
-                                <Heading size='md'>Recommanded core build</Heading>
+                                <Heading size='md'>Tips using {name}</Heading>
+                                {ally.map((tips, key) => (
+                                    <Box key={key} my={4}>
+                                        <Text textAlign='justify'>{tips}</Text>
+                                    </Box>
+                                ))}
+                            </Box>
+
+                            <Divider borderColor='#292929'/>
+
+                            <Box my={4}>
+                                <Heading size='md'>Tips agains&apos;t {name}</Heading>
+                                {enemy.map((tips, key) => (
+                                    <Box key={key} my={4}>
+                                        <Text textAlign='justify'>{tips}</Text>
+                                    </Box>
+                                ))}
                             </Box>
                         </Box>
                     </ModalBody>

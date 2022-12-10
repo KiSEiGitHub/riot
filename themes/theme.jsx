@@ -4,7 +4,8 @@ import faille from '../assets/faille.png'
 const styles = {
     global: (props) => ({
         body: {
-            bg: {faille}
+            bg: { faille },
+            color: '#fff'
         }
     })
 }

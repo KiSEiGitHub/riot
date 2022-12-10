@@ -61,6 +61,24 @@ export default function Home() {
         });
       }
 
+      // fetch allytips 
+      const tabTipsAlly = Object.values(data)
+      const tabAlly = []
+      tabTipsAlly.forEach((ally) => {
+        tabAlly.push(ally.allytips[0])
+        tabAlly.push(ally.allytips[1])
+        tabAlly.push(ally.allytips[2])
+      })
+
+      // fetch ennemytips
+      const tabTipsEnn = Object.values(data)
+      const tabEnn = []
+      tabTipsEnn.forEach((enn) => {
+        tabEnn.push(enn.enemytips[0])
+        tabEnn.push(enn.enemytips[1])
+        tabEnn.push(enn.enemytips[2])
+      })
+
       setChampion((curr) => [
         ...curr,
         {
@@ -72,6 +90,8 @@ export default function Home() {
           lore: data[champion.name]["lore"],
           spells: spellsTab,
           sums: tabSums,
+          allytips : tabAlly,
+          enemytips : tabEnn,
         },
       ]);
 
@@ -100,6 +120,8 @@ export default function Home() {
                 sums={item.sums}
                 tags={item.tags}
                 title={item.title}
+                ally={item.allytips}
+                enemy={item.enemytips}
               />
               <Image
                 src={item.loading}
@@ -107,6 +129,7 @@ export default function Home() {
                 width="100%"
                 height="auto"
                 borderTopRadius="10px"
+                pos='relative'
               />
             </div>
           ))}
