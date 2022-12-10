@@ -5,8 +5,14 @@ import {
     ModalHeader, ModalOverlay, Tab, TabList, TabPanel, TabPanels, Tabs, Tag, Text, Tooltip, useDisclosure
 } from '@chakra-ui/react';
 import React from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Autoplay, Pagination, Navigation } from "swiper";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, title, ally, enemy }) {
+
+export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, title, ally, enemy, skins }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -42,18 +48,43 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                 zIndex={999}
             />
 
-            <Modal isOpen={isOpen} w='900px' onClose={onClose}>
+            <Modal isOpen={isOpen} size='4xl' onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent bg='#171717'>
                     <ModalHeader>{name} ~ {title}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Image
-                            src={wallpaper}
-                            alt='wal'
-                            borderRadius={15}
-                            mb={5}
-                        />
+                        <Swiper
+                            spaceBetween={30}
+                            centeredSlides={true}
+                            autoplay={{
+                                delay: 3500,
+                                disableOnInteraction: true,
+                            }}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            modules={[Autoplay, Pagination]}
+                            className="mySwiper"
+                        >
+                            {skins.map(({num, name: skinName}, key) => {
+                                return (
+                                    <>
+                                        <SwiperSlide style={{position: 'relative'}}>
+                                            <Image
+                                                key={key}
+                                                src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_${num}.jpg`}
+                                                alt='wal'
+                                                borderRadius={15}
+                                                mb={5}
+                                                objectFit='cover'
+                                            />
+                                            <Text variant='SkinName'>{skinName}</Text>
+                                        </SwiperSlide>
+                                    </>
+                                )
+                            })}
+                        </Swiper>
                         <Text
                             textAlign='justify'
                         >
@@ -119,7 +150,7 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                                 ))}
                             </Box>
 
-                            <Divider borderColor='#292929'/>
+                            <Divider borderColor='#292929' />
 
                             <Box my={4}>
                                 <Heading size='md'>Tips agains&apos;t {name}</Heading>

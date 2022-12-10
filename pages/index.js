@@ -79,9 +79,18 @@ export default function Home() {
         tabEnn.push(enn.enemytips[2])
       })
 
+      // fetch skins
+      const skins = Object.values(data)
+      const allChampSkins = skins[0].skins
+      const skinsTab = []
+      allChampSkins.forEach((skin) => {
+        skinsTab.push(skin)
+      })
+
       setChampion((curr) => [
         ...curr,
         {
+          skins: skinsTab,
           name: champion.name,
           tags: champion.tags,
           title: champion.title,
@@ -122,6 +131,7 @@ export default function Home() {
                 title={item.title}
                 ally={item.allytips}
                 enemy={item.enemytips}
+                skins={item.skins}
               />
               <Image
                 src={item.loading}
