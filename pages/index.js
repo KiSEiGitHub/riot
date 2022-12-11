@@ -9,7 +9,7 @@ export default function Home() {
 
   const getchampion = async () => {
     const res = await fetch(
-      "http://ddragon.leagueoflegends.com/cdn/12.22.1/data/en_US/champion.json"
+      "https://ddragon.leagueoflegends.com/cdn/12.22.1/data/en_US/champion.json"
     );
 
     const { data } = await res.json();
@@ -18,13 +18,13 @@ export default function Home() {
     champ.forEach(async (champion) => {
       // fetch chaque champion
       const res = await fetch(
-        `http://ddragon.leagueoflegends.com/cdn/12.23.1/data/en_US/champion/${champion.name}.json`
+        `https://ddragon.leagueoflegends.com/cdn/12.23.1/data/en_US/champion/${champion.name}.json`
       );
       const { data } = await res.json();
 
       // fetch summonners
       const resSumms = await fetch(
-        "http://ddragon.leagueoflegends.com/cdn/12.23.1/data/en_US/summoner.json"
+        "https://ddragon.leagueoflegends.com/cdn/12.23.1/data/en_US/summoner.json"
       );
       const dataSums = await resSumms.json();
       const summoners = Object.values(dataSums.data);
@@ -95,9 +95,9 @@ export default function Home() {
           name: champion.name,
           tags: champion.tags,
           title: champion.title,
-          sqaureIcon: `http://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/${champion.name}.png`,
-          splash: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`,
-          loading: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.name}_0.jpg`,
+          sqaureIcon: `https://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/${champion.name}.png`,
+          splash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`,
+          loading: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.name}_0.jpg`,
           lore: data[champion.name]["lore"],
           spells: spellsTab,
           sums: tabSums,
