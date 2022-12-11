@@ -64,7 +64,7 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                             pagination={{
                                 clickable: true,
                             }}
-                            modules={[Autoplay, Pagination]}
+                            modules={[Autoplay,Navigation, Pagination]}
                             className="mySwiper"
                         >
                             {skins.map(({num, name: skinName}, key) => {

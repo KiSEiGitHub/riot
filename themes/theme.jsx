@@ -19,7 +19,7 @@ const components = {
                 bottom: 10,
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                fontSize: '1.5em',
+                fontSize: {sm: '1em', md: '1.45em'},
                 p: '5px 15px',
                 borderRadius: 8
             }

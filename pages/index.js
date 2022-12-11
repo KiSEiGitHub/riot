@@ -1,10 +1,11 @@
-import { Image } from "@chakra-ui/react";
+import { Image, useMediaQuery, Box, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ModalLore from "../components/ModalLore";
 
 export default function Home() {
   const [champion, setChampion] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [mediaTrigger] = useMediaQuery("(max-width: 680px)");
 
   const getchampion = async () => {
     const res = await fetch(
@@ -61,31 +62,31 @@ export default function Home() {
         });
       }
 
-      // fetch allytips 
-      const tabTipsAlly = Object.values(data)
-      const tabAlly = []
+      // fetch allytips
+      const tabTipsAlly = Object.values(data);
+      const tabAlly = [];
       tabTipsAlly.forEach((ally) => {
-        tabAlly.push(ally.allytips[0])
-        tabAlly.push(ally.allytips[1])
-        tabAlly.push(ally.allytips[2])
-      })
+        tabAlly.push(ally.allytips[0]);
+        tabAlly.push(ally.allytips[1]);
+        tabAlly.push(ally.allytips[2]);
+      });
 
       // fetch ennemytips
-      const tabTipsEnn = Object.values(data)
-      const tabEnn = []
+      const tabTipsEnn = Object.values(data);
+      const tabEnn = [];
       tabTipsEnn.forEach((enn) => {
-        tabEnn.push(enn.enemytips[0])
-        tabEnn.push(enn.enemytips[1])
-        tabEnn.push(enn.enemytips[2])
-      })
+        tabEnn.push(enn.enemytips[0]);
+        tabEnn.push(enn.enemytips[1]);
+        tabEnn.push(enn.enemytips[2]);
+      });
 
       // fetch skins
-      const skins = Object.values(data)
-      const allChampSkins = skins[0].skins
-      const skinsTab = []
+      const skins = Object.values(data);
+      const allChampSkins = skins[0].skins;
+      const skinsTab = [];
       allChampSkins.forEach((skin) => {
-        skinsTab.push(skin)
-      })
+        skinsTab.push(skin);
+      });
 
       setChampion((curr) => [
         ...curr,
@@ -94,13 +95,14 @@ export default function Home() {
           name: champion.name,
           tags: champion.tags,
           title: champion.title,
+          sqaureIcon: `http://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/${champion.name}.png`,
           splash: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`,
           loading: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.name}_0.jpg`,
           lore: data[champion.name]["lore"],
           spells: spellsTab,
           sums: tabSums,
-          allytips : tabAlly,
-          enemytips : tabEnn,
+          allytips: tabAlly,
+          enemytips: tabEnn,
         },
       ]);
 
@@ -120,7 +122,13 @@ export default function Home() {
       <div className="container-champion">
         {!isLoading &&
           champion.map((item, key) => (
-            <div className="champions-cards" key={key}>
+            <Box
+              className="champions-cards"
+              key={key}
+              w={["auto", "auto", "300px"]}
+              h={["auto", "auto", "auto"]}
+              pos="relative"
+            >
               <ModalLore
                 lore={item.lore}
                 name={item.name}
@@ -133,15 +141,40 @@ export default function Home() {
                 enemy={item.enemytips}
                 skins={item.skins}
               />
-              <Image
-                src={item.loading}
-                alt="ok"
-                width="100%"
-                height="auto"
-                borderTopRadius="10px"
-                pos='relative'
-              />
-            </div>
+              {mediaTrigger ? (
+                <Image
+                  src={item.sqaureIcon}
+                  alt="ok"
+                  width="60px"
+                  height="auto"
+                  borderTopRadius="10px"
+                  pos="relative"
+                />
+              ) : (
+                <>
+                  <Image
+                    src={item.loading}
+                    alt="ok"
+                    width="100%"
+                    height="auto"
+                    borderTopRadius="10px"
+                    pos="relative"
+                  />
+                  <Text
+                    pos="absolute"
+                    backdropFilter="blur(10px)"
+                    bottom={5}
+                    left="50%"
+                    fontSize="1.2em"
+                    transform="translate(-50%, -50%)"
+                    borderRadius={8}
+                    p="5px 10px"
+                  >
+                    {item.name}
+                  </Text>
+                </>
+              )}
+            </Box>
           ))}
       </div>
     </div>
