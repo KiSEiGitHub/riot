@@ -153,7 +153,7 @@ export default function ModalLore({ name, lore, wallpaper, spells, sums, tags, t
                             <Divider borderColor='#292929' />
 
                             <Box my={4}>
-                                <Heading size='md'>Tips agains&apos;t {name}</Heading>
+                                <Heading size='md'>Tips against {name}</Heading>
                                 {enemy.map((tips, key) => (
                                     <Box key={key} my={4}>
                                         <Text textAlign='justify'>{tips}</Text>
